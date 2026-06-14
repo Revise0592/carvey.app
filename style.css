@@ -546,19 +546,6 @@ pre {
   text-underline-offset: 3px;
 }
 
-.unraid-panel {
-  padding: 1.25rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.unraid-panel strong {
-  color: var(--text);
-}
 
 /* ── Footer ──────────────────────────────────────────── */
 footer {
