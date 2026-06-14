@@ -546,6 +546,48 @@ pre {
   text-underline-offset: 3px;
 }
 
+.unraid-callout {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid #f15a2440;
+  border-left: 3px solid #f15a24;
+  border-radius: var(--radius);
+}
+
+.unraid-callout-icon {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f15a24;
+}
+
+.unraid-callout-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.unraid-callout-text {
+  font-size: 0.875rem;
+}
+
+.unraid-callout-text strong {
+  color: var(--text);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.unraid-callout-text p {
+  color: var(--text-muted);
+  margin: 0;
+}
+
 /* ── Footer ──────────────────────────────────────────── */
 footer {
   border-top: 1px solid var(--border);
