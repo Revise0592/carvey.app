@@ -4,10 +4,11 @@ async function loadVersion() {
   if (!el) return;
   try {
     const r = await fetch('https://api.github.com/repos/Revise0592/Carvey/releases/latest');
+    const text = document.getElementById('version-text');
     if (r.ok) {
       const d = await r.json();
       if (d.tag_name) {
-        el.childNodes[1].textContent = d.tag_name;
+        text.textContent = d.tag_name;
         el.href = d.html_url;
         return;
       }
@@ -16,7 +17,7 @@ async function loadVersion() {
     const t = await fetch('https://api.github.com/repos/Revise0592/Carvey/tags');
     if (t.ok) {
       const tags = await t.json();
-      if (tags.length) el.childNodes[1].textContent = tags[0].name;
+      if (tags.length) text.textContent = tags[0].name;
     }
   } catch (_) {}
 }
