@@ -1,3 +1,21 @@
+// Theme toggle
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('carvey-theme', theme);
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('carvey-theme');
+  if (saved) { setTheme(saved); return; }
+  setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+}
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+  setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+});
+
+initTheme();
+
 // Live version badge — fetches latest release tag from GitHub API
 async function loadVersion() {
   const el = document.getElementById('version-badge');
