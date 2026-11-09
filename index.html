@@ -1,205 +1,244 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
-  <script>(function(){var t=localStorage.getItem('carvey-theme')||(window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
+  <script>(function(){var t;try{t=localStorage.getItem('carvey-theme')}catch(e){}t=t||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t);})();</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Carvey</title>
+  <title>Carvey: your digital service history</title>
   <meta name="description" content="Track every service, repair and MOT for all your vehicles. Self-hosted, local-first car maintenance tracker." />
+  <meta name="theme-color" content="#0b0b0c" />
   <meta property="og:title" content="Carvey" />
   <meta property="og:description" content="Track every service, repair and MOT for all your vehicles. Self-hosted, local-first." />
-  <meta property="og:image" content="https://carvey.app/assets/icons/Carvey-dark.png" />
+  <meta property="og:image" content="https://carvey.app/assets/screenshots/01.png" />
   <meta property="og:url" content="https://carvey.app" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="assets/icons/Favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<!-- ── Nav ───────────────────────────────────────────── -->
-<nav>
-  <a class="nav-brand" href="#">
-    <img class="nav-logo-dark" src="assets/icons/Carvey-dark.png" alt="Carvey" />
-    <img class="nav-logo-light" src="assets/icons/Carvey-light.png" alt="Carvey" />
-    <span>Carvey</span>
-  </a>
-  <div class="nav-links">
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
-      <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
-      <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-    </button>
-    <a class="btn btn-outline" href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="flex-shrink:0"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-      GitHub
-    </a>
-  </div>
-</nav>
-
-<!-- ── Hero ──────────────────────────────────────────── -->
-<div class="hero">
-  <div class="hero-content">
-    <a id="version-badge" class="version-badge" href="https://github.com/Revise0592/Carvey/releases" target="_blank" rel="noopener">
-      <span class="version-badge-dot"></span><span id="version-text">v1.0.1</span>
+<!-- Nav -->
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="#top" aria-label="Carvey home">
+      <img class="logo-dark" src="assets/icons/Carvey-dark.png" alt="" width="28" height="28" />
+      <img class="logo-light" src="assets/icons/Carvey-light.png" alt="" width="28" height="28" />
+      <span>Carvey</span>
     </a>
 
-    <h1>Your digital<br /><em>service history.</em></h1>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#features">Features</a>
+      <a href="#install">Install</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
-    <p class="hero-desc">
-      Track every service, repair and MOT for all your vehicles.
-      Self-hosted. Local-first.
-    </p>
-
-    <div class="hero-actions">
-      <a class="btn btn-primary" href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-        View on GitHub
+    <div class="nav-actions">
+      <button class="icon-btn" id="theme-toggle" aria-label="Toggle colour theme">
+        <svg class="lucide lucide-sun icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="lucide lucide-moon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+      <a class="btn btn-ghost btn-sm gh-btn" href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span>GitHub</span>
       </a>
-      <a class="btn btn-outline" href="#getting-started">
-        Get Started
+      <a class="btn btn-primary btn-sm nav-cta" href="#install">Get Carvey</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <a id="version-badge" class="pill" href="https://github.com/Revise0592/Carvey/releases" target="_blank" rel="noopener">
+        <span class="pill-dot"></span>
+        <span id="version-text">v1.0.1</span>
+        <span class="pill-sep"></span>
+        <span class="pill-muted">See what's new</span>
+        <svg class="lucide lucide-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
-    </div>
-  </div>
 
-  <div class="hero-image">
-    <div class="hero-screenshot">
-      <img src="assets/screenshots/01.png" alt="Carvey dashboard showing vehicles and maintenance history" />
-    </div>
-    <div class="hero-plates">
-      <img class="plate-dark-only" src="assets/icons/Carvey-plate-front.png" alt="Carvey white plate" />
-      <img class="plate-light-only" src="assets/icons/Carvey-plate-rear.png" alt="Carvey yellow plate" />
-    </div>
-  </div>
-</div>
+      <h1>Your digital<br /><span class="hl">service history.</span></h1>
 
-<!-- ── Features ───────────────────────────────────────── -->
-<section id="features">
-  <p class="section-label">Features</p>
-  <h2 class="section-title">Everything you need to track your cars</h2>
-  <p class="section-sub">From oil changes to MOTs — every detail, every vehicle, in one place.</p>
+      <p class="lead">
+        Track every service, repair and MOT across all your vehicles, with receipts attached.
+        Self-hosted and local-first, so your data stays on your server.
+      </p>
 
-  <div class="features-grid">
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="car"></i>
+      <div class="hero-actions">
+        <a class="btn btn-primary btn-lg" href="#install">
+          <svg class="lucide lucide-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+          Install with Docker
+        </a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">
+          View source
+          <svg class="lucide lucide-arrow-up-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
+        </a>
       </div>
-      <h3>Multi-vehicle Garage</h3>
-      <p>Track every car with make, model, year, mileage and full purchase history. Add photos and mark vehicles as sold.</p>
+
+      <ul class="hero-meta">
+        <li><svg class="lucide lucide-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Free &amp; open source</li>
+        <li><svg class="lucide lucide-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Single container</li>
+        <li><svg class="lucide lucide-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>No tracking</li>
+      </ul>
     </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="wrench"></i>
-      </div>
-      <h3>Service &amp; Repair Logs</h3>
-      <p>Log maintenance and repairs with costs, dates, mileage, notes and receipt attachments. PDF and image support.</p>
+    <div class="container">
+      <figure class="window">
+        <div class="window-bar" aria-hidden="true">
+          <span></span><span></span><span></span>
+          <div class="window-url"><svg class="lucide lucide-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>carvey.local</div>
+        </div>
+        <img src="assets/screenshots/01.png" width="1920" height="1080" alt="Carvey dashboard showing three vehicles, spending this year, upcoming MOTs and reminders" />
+      </figure>
     </div>
+  </section>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="clipboard-check"></i>
+  <!-- Highlights strip -->
+  <section class="strip">
+    <div class="container strip-inner">
+      <div class="strip-item">
+        <svg class="lucide lucide-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>
+        <div><strong>Self-hosted</strong><span>Runs on your NAS, homelab or VPS</span></div>
       </div>
-      <h3>MOT &amp; Emissions Tracking</h3>
-      <p>Record test results, expiry dates and mileage. Get 45-day advance reminders before your next MOT is due.</p>
+      <div class="strip-item">
+        <svg class="lucide lucide-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+        <div><strong>Local-first</strong><span>SQLite, no external services</span></div>
+      </div>
+      <div class="strip-item">
+        <svg class="lucide lucide-shield-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><strong>Private</strong><span>No accounts, analytics or tracking</span></div>
+      </div>
+      <div class="strip-item">
+        <svg class="lucide lucide-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+        <div><strong>MIT licensed</strong><span>Free to use, fork and modify</span></div>
+      </div>
     </div>
+  </section>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="bell"></i>
+  <!-- Features -->
+  <section id="features" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow">Features</p>
+        <h2>Everything a glovebox full of paperwork should be.</h2>
+        <p class="section-sub">From oil changes to MOTs, every detail for every vehicle lives in one tidy place.</p>
       </div>
-      <h3>Smart Reminders</h3>
-      <p>Date-based and mileage-based reminders so nothing slips through. Mark complete when done.</p>
+
+      <div class="bento">
+        <article class="card card-lg">
+          <div class="card-icon"><svg class="lucide lucide-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg></div>
+          <h3>A garage for every car</h3>
+          <p>Make, model, year, mileage, photos and purchase history for each vehicle. Mark cars as sold and keep their history.</p>
+          <div class="plates" aria-hidden="true">
+            <span class="plate">PR07 EST</span>
+            <span class="plate">MK02 SUN</span>
+            <span class="plate">DE19 MOO</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-icon"><svg class="lucide lucide-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+          <h3>Service &amp; repair logs</h3>
+          <p>Costs, dates, mileage and notes, with PDF and image receipts attached to any record.</p>
+        </article>
+
+        <article class="card">
+          <div class="card-icon"><svg class="lucide lucide-clipboard-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/></svg></div>
+          <h3>MOT &amp; reminders</h3>
+          <p>Log test results and get a heads-up 45 days before the next MOT. Add date or mileage reminders so the cambelt never sneaks up on you.</p>
+        </article>
+
+
+        <article class="card card-lg card-stats">
+          <div>
+            <div class="card-icon"><svg class="lucide lucide-layout-dashboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg></div>
+            <h3>Your whole garage at a glance</h3>
+            <p>Year-to-date spending, open reminders and upcoming MOTs on one dashboard.</p>
+          </div>
+          <div class="mini-stats" aria-hidden="true">
+            <div class="mini-stat"><span>Vehicles</span><strong>3</strong></div>
+            <div class="mini-stat"><span>Spent this year</span><strong>£1,651.85</strong></div>
+            <div class="mini-stat"><span>Open reminders</span><strong>3</strong></div>
+          </div>
+        </article>
+      </div>
+
+      <div class="feature-list">
+        <div class="feature">
+          <svg class="lucide lucide-repeat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/></svg>
+          <div><h4>Service plans</h4><p>Reusable intervals, like an oil change every 6 months or 6,000 miles, assigned per vehicle.</p></div>
+        </div>
+        <div class="feature">
+          <svg class="lucide lucide-shopping-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <div><h4>To-buy list</h4><p>Plan parts with estimated costs, then turn them into log entries once fitted.</p></div>
+        </div>
+        <div class="feature">
+          <svg class="lucide lucide-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          <div><h4>Regional settings</h4><p>GBP, USD or EUR. Miles or kilometres. MOT, emissions test or neither.</p></div>
+        </div>
+        <div class="feature">
+          <svg class="lucide lucide-palette" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+          <div><h4>10 colour themes</h4><p>Factory, British Racing Green, Signal Red, Petrol Blue and more, in light and dark.</p></div>
+        </div>
+        <div class="feature">
+          <svg class="lucide lucide-archive-restore" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="5" x="2" y="3" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h2"/><path d="M20 8v11a2 2 0 0 1-2 2h-2"/><path d="m9 15 3-3 3 3"/><path d="M12 12v9"/></svg>
+          <div><h4>Backup &amp; restore</h4><p>Full ZIP export of the database and attachments, with a preview before restoring.</p></div>
+        </div>
+        <div class="feature">
+          <svg class="lucide lucide-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          <div><h4>Optional auth</h4><p>bcrypt-secured login, or turn it off behind a reverse proxy such as Authelia.</p></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="shopping-cart"></i>
+  <!-- Install -->
+  <section id="install" class="section section-alt">
+    <div class="container install">
+      <div class="install-copy">
+        <p class="eyebrow">Install</p>
+        <h2>Up and running in about a minute.</h2>
+        <p class="section-sub">Carvey ships as a single Docker container. No external database, no extra services.</p>
+
+        <ol class="steps">
+          <li>
+            <span class="step-num">1</span>
+            <div><h4>Start the container</h4><p>Use Compose, a one-line <code>docker run</code>, or Unraid Community Apps.</p></div>
+          </li>
+          <li>
+            <span class="step-num">2</span>
+            <div><h4>Open Carvey</h4><p>Go to <code>http://localhost:3000</code> in your browser.</p></div>
+          </li>
+          <li>
+            <span class="step-num">3</span>
+            <div><h4>Create your account</h4><p>Set up the admin login on first run, then add your first car.</p></div>
+          </li>
+        </ol>
+
+        <a class="text-link" href="https://github.com/Revise0592/Carvey#readme" target="_blank" rel="noopener">
+          Full setup guide and environment variables
+          <svg class="lucide lucide-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
       </div>
-      <h3>To Buy List</h3>
-      <p>Plan purchases with estimated costs. Convert them directly to maintenance or repair logs once completed.</p>
-    </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="repeat"></i>
-      </div>
-      <h3>Service Plans</h3>
-      <p>Define reusable service intervals — e.g. oil change every 6 months / 6,000 miles — and assign them per vehicle.</p>
-    </div>
+      <div class="code-card">
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab" aria-selected="true" data-tab="compose">Compose</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="run">Docker run</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="unraid">Unraid</button>
+          <button class="copy-btn" id="copy-btn" aria-label="Copy to clipboard">
+            <svg class="lucide lucide-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg><span>Copy</span>
+          </button>
+        </div>
 
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="palette"></i>
-      </div>
-      <h3>10 Colour Themes</h3>
-      <p>Choose from Factory, British Racing Green, Midnight Alloy, Signal Red, Petrol Blue and more. Light and dark mode included.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="globe"></i>
-      </div>
-      <h3>Regional Settings</h3>
-      <p>GBP / USD / EUR, miles or kilometres, DD Mon YYYY or ISO dates. Configurable annual test labels per region.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="archive-restore"></i>
-      </div>
-      <h3>Backup &amp; Restore</h3>
-      <p>Full ZIP export and import of your database and all attachments. Preview restore contents before committing.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="lock"></i>
-      </div>
-      <h3>Optional Auth</h3>
-      <p>Disable authentication for reverse proxy setups (e.g. Authelia). bcrypt-secured when enabled.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="layout-dashboard"></i>
-      </div>
-      <h3>Dashboard</h3>
-      <p>Year-to-date spending, open reminders, upcoming MOTs in the next 45 days — all at a glance.</p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">
-        <i data-lucide="server"></i>
-      </div>
-      <h3>Self-hosted &amp; Local-first</h3>
-      <p>SQLite database, no external services, no tracking. Deploy with Docker in minutes. Your data stays yours.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ── Getting Started ────────────────────────────────── -->
-<section id="getting-started">
-  <p class="section-label">Get Started</p>
-  <h2 class="section-title">Up and running in minutes</h2>
-  <p class="section-sub">Carvey runs as a single Docker container. No external database or services required.</p>
-
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="compose">Docker Compose</button>
-    <button class="tab-btn" data-tab="run">Docker Run</button>
-    <button class="tab-btn" data-tab="unraid">Unraid</button>
-  </div>
-
-  <div id="tab-compose" class="tab-panel active">
-    <div class="code-block">
-      <div class="code-block-header">
-        <span class="code-block-lang">docker-compose.yml</span>
-        <button class="copy-btn" data-copy="compose">
-          <i data-lucide="copy"></i>
-          Copy
-        </button>
-      </div>
-      <pre id="code-compose"><span class="kw">services</span>:
+        <div class="tab-panel active" id="tab-compose" role="tabpanel">
+          <div class="code-file">docker-compose.yml</div>
+<pre><span class="kw">services</span>:
   <span class="kw">carvey</span>:
     <span class="kw">image</span>: <span class="str">ghcr.io/revise0592/carvey:latest</span>
     <span class="kw">ports</span>:
@@ -209,65 +248,104 @@
     <span class="kw">environment</span>:
       - <span class="str">TZ=Europe/London</span>
     <span class="kw">restart</span>: <span class="val">unless-stopped</span></pre>
-    </div>
-  </div>
+        </div>
 
-  <div id="tab-run" class="tab-panel">
-    <div class="code-block">
-      <div class="code-block-header">
-        <span class="code-block-lang">shell</span>
-        <button class="copy-btn" data-copy="run">
-          <i data-lucide="copy"></i>
-          Copy
-        </button>
+        <div class="tab-panel" id="tab-run" role="tabpanel">
+          <div class="code-file">terminal</div>
+<pre><span class="cmt">$</span> docker run -d \
+    --name carvey \
+    -p <span class="val">3000</span>:<span class="val">3000</span> \
+    -v <span class="str">./data:/app/data</span> \
+    -e <span class="str">TZ=Europe/London</span> \
+    --restart unless-stopped \
+    ghcr.io/revise0592/carvey:latest</pre>
+        </div>
+
+        <div class="tab-panel" id="tab-unraid" role="tabpanel">
+          <div class="code-file">Community Applications</div>
+<pre><span class="cmt"># 1. Open Apps from your Unraid dashboard</span>
+<span class="cmt"># 2. Search for</span> <span class="str">Carvey</span>
+<span class="cmt"># 3. Click</span> <span class="val">Install</span><span class="cmt">, no command line needed</span></pre>
+        </div>
       </div>
-      <pre id="code-run">docker run -d \
-  --name carvey \
-  -p <span class="val">3000</span>:<span class="val">3000</span> \
-  -v <span class="str">./data:/app/data</span> \
-  -e <span class="str">TZ=Europe/London</span> \
-  --restart unless-stopped \
-  ghcr.io/revise0592/carvey:latest</pre>
     </div>
-  </div>
+  </section>
 
-  <div id="tab-unraid" class="tab-panel">
-    <div class="code-block">
-      <div class="code-block-header">
-        <span class="code-block-lang">Community Applications</span>
+  <!-- FAQ -->
+  <section id="faq" class="section">
+    <div class="container faq">
+      <div class="section-head section-head-left">
+        <p class="eyebrow">FAQ</p>
+        <h2>Good questions.</h2>
+        <p class="section-sub">Anything else? <a class="inline-link" href="https://github.com/Revise0592/Carvey/issues" target="_blank" rel="noopener">Open an issue</a> or <a class="inline-link" href="https://carvey.userjot.com/" target="_blank" rel="noopener">suggest a feature</a>.</p>
       </div>
-      <pre><span class="cmt"># 1. Open Community Applications from your Unraid dashboard</span>
-<span class="cmt"># 2. Search for Carvey</span>
-<span class="cmt"># 3. Click Install — no command line needed</span></pre>
+
+      <div class="faq-list">
+        <details>
+          <summary>Where is my data stored?<svg class="lucide lucide-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></summary>
+          <p>Everything lives in a SQLite database under <code>/app/data</code>, with uploaded photos and attachments stored alongside it. Mount that folder as a volume and back it up like any other file.</p>
+        </details>
+        <details>
+          <summary>Does Carvey send anything to the cloud?<svg class="lucide lucide-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></summary>
+          <p>No. There are no external services, accounts or analytics. Carvey runs entirely on hardware you control.</p>
+        </details>
+        <details>
+          <summary>Can I use it outside the UK?<svg class="lucide lucide-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></summary>
+          <p>Yes. Under Settings → Regional you can switch currency (GBP, USD, EUR), distance (miles or km), date format, plate colour, and rename or disable the annual vehicle test.</p>
+        </details>
+        <details>
+          <summary>Can I run it behind a reverse proxy?<svg class="lucide lucide-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></summary>
+          <p>Yes. Authentication can be disabled when Carvey sits behind a trusted proxy that handles login for you, such as Authelia or Authentik.</p>
+        </details>
+        <details>
+          <summary>I've forgotten my password. Now what?<svg class="lucide lucide-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></summary>
+          <p>Run <code>docker exec -it &lt;container&gt; node scripts/reset-password.mjs</code>, or set <code>CARVEY_RESET_PASSWORD</code> in your environment, restart, sign in, then remove it again.</p>
+        </details>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <p class="getting-started-footer">
-    Then open <strong>http://localhost:3000</strong> in your browser. For full setup guides, environment variables and reverse proxy examples, see the
-    <a href="https://github.com/Revise0592/Carvey#readme" target="_blank" rel="noopener">README on GitHub</a>.
-  </p>
-</section>
+  <!-- CTA -->
+  <section class="section section-tight">
+    <div class="container">
+      <div class="cta">
+        <img class="cta-plate plate-front" src="assets/icons/Carvey-plate-front.png" alt="Carvey" width="1766" height="396" loading="lazy" />
+        <img class="cta-plate plate-rear" src="assets/icons/Carvey-plate-rear.png" alt="Carvey" width="1766" height="396" loading="lazy" />
+        <h2>Give your cars the paperwork they deserve.</h2>
+        <p>Free, open source and yours to keep.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary btn-lg" href="#install">Get started</a>
+          <a class="btn btn-ghost btn-lg" href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">
+            <svg class="lucide lucide-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+            Star on GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- ── Footer ─────────────────────────────────────────── -->
-<footer>
-  <div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-inner">
     <div class="footer-brand">
-      <span>Carvey</span>
+      <a class="brand" href="#top">
+        <img class="logo-dark" src="assets/icons/Carvey-dark.png" alt="" width="24" height="24" />
+        <img class="logo-light" src="assets/icons/Carvey-light.png" alt="" width="24" height="24" />
+        <span>Carvey</span>
+      </a>
+      <p>Self-hosted car maintenance tracker. MIT License.</p>
     </div>
-    <p class="footer-meta">MIT License</p>
-  </div>
-  <div class="footer-links">
-    <a href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener" title="GitHub">
-      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
-    </a>
-    <a href="https://github.com/Revise0592/Carvey/pkgs/container/carvey" target="_blank" rel="noopener" title="Container Registry">
-      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-    </a>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="https://github.com/Revise0592/Carvey" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/Revise0592/Carvey/releases" target="_blank" rel="noopener">Releases</a>
+      <a href="https://github.com/Revise0592/Carvey/pkgs/container/carvey" target="_blank" rel="noopener">Container</a>
+      <a href="https://carvey.userjot.com/" target="_blank" rel="noopener">Feedback</a>
+    </nav>
   </div>
 </footer>
 
-<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="app.js"></script>
-<script>lucide.createIcons();</script>
 </body>
 </html>

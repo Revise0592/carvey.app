@@ -1,37 +1,34 @@
 // Theme toggle
 function setTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
-  localStorage.setItem('carvey-theme', theme);
-}
-
-function initTheme() {
-  const saved = localStorage.getItem('carvey-theme');
-  if (saved) { setTheme(saved); return; }
-  setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  try { localStorage.setItem('carvey-theme', theme); } catch (_) {}
 }
 
 document.getElementById('theme-toggle').addEventListener('click', () => {
   setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
 
-initTheme();
+// Nav border once scrolled
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+window.addEventListener('scroll', onScroll, { passive: true });
+onScroll();
 
-// Live version badge — fetches latest release tag from GitHub API
+// Live version badge: latest release tag from GitHub, falling back to tags
 async function loadVersion() {
-  const el = document.getElementById('version-badge');
-  if (!el) return;
+  const badge = document.getElementById('version-badge');
+  const text = document.getElementById('version-text');
+  if (!badge || !text) return;
   try {
     const r = await fetch('https://api.github.com/repos/Revise0592/Carvey/releases/latest');
-    const text = document.getElementById('version-text');
     if (r.ok) {
       const d = await r.json();
       if (d.tag_name) {
         text.textContent = d.tag_name;
-        el.href = d.html_url;
+        if (d.html_url) badge.href = d.html_url;
         return;
       }
     }
-    // Fallback: tags list (for repos without formal releases)
     const t = await fetch('https://api.github.com/repos/Revise0592/Carvey/tags');
     if (t.ok) {
       const tags = await t.json();
@@ -39,46 +36,57 @@ async function loadVersion() {
     }
   } catch (_) {}
 }
+loadVersion();
 
-// Tabs — Getting Started section
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + tab)?.classList.add('active');
-  });
-});
-
-// Copy buttons
+// Install tabs + copy
 const rawCode = {
   compose: `services:\n  carvey:\n    image: ghcr.io/revise0592/carvey:latest\n    ports:\n      - "3000:3000"\n    volumes:\n      - ./data:/app/data\n    environment:\n      - TZ=Europe/London\n    restart: unless-stopped`,
   run: `docker run -d \\\n  --name carvey \\\n  -p 3000:3000 \\\n  -v ./data:/app/data \\\n  -e TZ=Europe/London \\\n  --restart unless-stopped \\\n  ghcr.io/revise0592/carvey:latest`,
 };
 
-document.querySelectorAll('.copy-btn').forEach(btn => {
-  btn.addEventListener('click', async () => {
-    const key = btn.dataset.copy;
-    try {
-      await navigator.clipboard.writeText(rawCode[key]);
-      btn.classList.add('copied');
-      btn.querySelector('svg').innerHTML = '<polyline points="20 6 9 17 4 12"/>';
-      const text = btn.childNodes[btn.childNodes.length - 1];
-      text.textContent = 'Copied!';
-      setTimeout(() => {
-        btn.classList.remove('copied');
-        btn.querySelector('svg').innerHTML = '<rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>';
-        text.textContent = 'Copy';
-      }, 2000);
-    } catch (_) {}
+const copyBtn = document.getElementById('copy-btn');
+let activeTab = 'compose';
+
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    activeTab = btn.dataset.tab;
+    document.querySelectorAll('.tab').forEach(b => {
+      const on = b === btn;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-selected', on);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('active', p.id === 'tab-' + activeTab);
+    });
+    copyBtn.hidden = !rawCode[activeTab];
   });
 });
 
-// Nav background on scroll
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  nav.style.borderBottomColor = window.scrollY > 10 ? 'var(--border)' : 'transparent';
-}, { passive: true });
+copyBtn.addEventListener('click', async () => {
+  const code = rawCode[activeTab];
+  if (!code) return;
+  try {
+    await navigator.clipboard.writeText(code);
+    const label = copyBtn.querySelector('span');
+    copyBtn.classList.add('copied');
+    label.textContent = 'Copied';
+    setTimeout(() => {
+      copyBtn.classList.remove('copied');
+      label.textContent = 'Copy';
+    }, 1800);
+  } catch (_) {}
+});
 
-loadVersion();
+// Gentle reveal on scroll
+if ('IntersectionObserver' in window) {
+  const targets = document.querySelectorAll('.window, .strip-item, .section-head, .card, .feature, .install > *, .faq-list, .cta');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  targets.forEach(el => { el.classList.add('reveal'); io.observe(el); });
+}
