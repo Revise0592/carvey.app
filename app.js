@@ -8,29 +8,39 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
   setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
 });
 
-// Live version badge: latest release tag from GitHub, falling back to tags
-async function loadVersion() {
-  const badge = document.getElementById('version-badge');
-  const text = document.getElementById('version-text');
-  if (!badge || !text) return;
+// Mobile menu
+const menuBtn = document.getElementById('menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+function setMenu(open) {
+  mobileMenu.hidden = !open;
+  menuBtn.setAttribute('aria-expanded', String(open));
+}
+menuBtn.addEventListener('click', () => setMenu(mobileMenu.hidden));
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+
+// Latest release tag from GitHub, falling back to tags
+async function loadRelease() {
+  const link = document.getElementById('release');
+  const tag = document.getElementById('release-tag');
+  if (!link || !tag) return;
   try {
     const r = await fetch('https://api.github.com/repos/Revise0592/Carvey/releases/latest');
     if (r.ok) {
       const d = await r.json();
       if (d.tag_name) {
-        text.textContent = d.tag_name + ' is out';
-        if (d.html_url) badge.href = d.html_url;
+        tag.textContent = d.tag_name;
+        if (d.html_url) link.href = d.html_url;
         return;
       }
     }
     const t = await fetch('https://api.github.com/repos/Revise0592/Carvey/tags');
     if (t.ok) {
       const tags = await t.json();
-      if (tags.length) text.textContent = tags[0].name + ' is out';
+      if (tags.length) tag.textContent = tags[0].name;
     }
   } catch (_) {}
 }
-loadVersion();
+loadRelease();
 
 // Highlight the nav link for the section in view
 const navLinks = [...document.querySelectorAll('.nav-links a')];
@@ -45,14 +55,15 @@ if ('IntersectionObserver' in window && navLinks.length) {
   byId.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
 }
 
-// Screen tour: segmented control swaps screenshot + caption
-document.querySelectorAll('.seg').forEach(btn => {
+// Screen tour: segmented control swaps screenshot and caption
+const segs = [...document.querySelectorAll('.seg')];
+segs.forEach(btn => {
   btn.addEventListener('click', () => {
     const shot = btn.dataset.shot;
-    document.querySelectorAll('.seg').forEach(b => {
+    segs.forEach(b => {
       const on = b === btn;
       b.classList.toggle('active', on);
-      b.setAttribute('aria-selected', on);
+      b.setAttribute('aria-selected', String(on));
     });
     document.querySelectorAll('.shot, .caption').forEach(el => {
       el.classList.toggle('active', el.dataset.shot === shot);
@@ -60,13 +71,14 @@ document.querySelectorAll('.seg').forEach(btn => {
   });
 });
 
-// Install tabs + copy
+// Install tabs and copy
 const rawCode = {
-  compose: `services:\n  carvey:\n    image: ghcr.io/revise0592/carvey:latest\n    ports:\n      - "3000:3000"\n    volumes:\n      - ./data:/app/data\n    environment:\n      - TZ=Europe/London\n    restart: unless-stopped`,
+  compose: `services:\n  carvey:\n    image: ghcr.io/revise0592/carvey:latest\n    ports:\n      - "3000:3000"\n    volumes:\n      - ./data:/app/data\n    environment:\n      TZ: Europe/London\n    restart: unless-stopped`,
   run: `docker run -d \\\n  --name carvey \\\n  -p 3000:3000 \\\n  -v ./data:/app/data \\\n  -e TZ=Europe/London \\\n  --restart unless-stopped \\\n  ghcr.io/revise0592/carvey:latest`,
 };
 
 const copyBtn = document.getElementById('copy-btn');
+const copyLabel = copyBtn.querySelector('span');
 let activeTab = 'compose';
 
 document.querySelectorAll('.code-tab').forEach(btn => {
@@ -75,7 +87,7 @@ document.querySelectorAll('.code-tab').forEach(btn => {
     document.querySelectorAll('.code-tab').forEach(b => {
       const on = b === btn;
       b.classList.toggle('active', on);
-      b.setAttribute('aria-selected', on);
+      b.setAttribute('aria-selected', String(on));
     });
     document.querySelectorAll('.tab-panel').forEach(p => {
       p.classList.toggle('active', p.id === 'tab-' + activeTab);
@@ -89,26 +101,11 @@ copyBtn.addEventListener('click', async () => {
   if (!code) return;
   try {
     await navigator.clipboard.writeText(code);
-    const label = copyBtn.querySelector('span');
     copyBtn.classList.add('copied');
-    label.textContent = 'Copied';
+    copyLabel.textContent = 'Copied';
     setTimeout(() => {
       copyBtn.classList.remove('copied');
-      label.textContent = 'Copy';
+      copyLabel.textContent = 'Copy';
     }, 1800);
   } catch (_) {}
 });
-
-// Gentle reveal on scroll
-if ('IntersectionObserver' in window) {
-  const targets = document.querySelectorAll('.stat, .section-head, .segmented, .tour, .mobile-copy, .phones, .card, .feature, .install > *, .faq-list, .cta');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -8% 0px' });
-  targets.forEach(el => { el.classList.add('reveal'); io.observe(el); });
-}
